@@ -401,7 +401,7 @@ export default function Form() {
                 setShow(false);
               }}
             />
-            {daterror && <div className="error">{daterror}</div>}
+            {daterror && <div className="error empty red">{daterror}</div>}
             <button
               className="button second"
               style={{ opacity: `${show === true ? "0" : "1"}` }}
@@ -555,9 +555,8 @@ const Container = styled.div`
     margin-top: 22px;
   }
   .date {
-    background: black !important;
-    border: 2px solid white !important;
-    border-bottom: 2px solid white !important;
+    border: 2px solid red !important;
+    border-bottom: 2px solid red !important;
   }
   .form {
     position: absolute;
@@ -612,7 +611,7 @@ const Container = styled.div`
   .invalid {
     animation: justshake 0.3s forwards;
     color: red !important;
-    border-bottom: 1px solid red !important;
+    border-bottom: 2px solid red !important;
   }
 
   @keyframes justshake {
