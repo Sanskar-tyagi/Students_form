@@ -226,7 +226,7 @@ export default function Form() {
   };
   return (
     <Container>
-      <div className="form">
+      <div className={`form ${showdata === true ? "formShow" : ""}`}>
         {first === true ? (
           <div className="first">
             <div className="user">
@@ -401,7 +401,7 @@ export default function Form() {
                 setShow(false);
               }}
             />
-
+            {daterror && <div className="error">{daterror}</div>}
             <button
               className="button second"
               style={{ opacity: `${show === true ? "0" : "1"}` }}
@@ -490,32 +490,25 @@ export default function Form() {
           </div>
         ) : showdata === true ? (
           <div>
-            <h1>Welcome</h1>
-            <img src={`${Data[0].image}`} width="150" alt="" />
-
-            <h2>Please check the details below</h2>
-            <p>Name: {Data[0].name}</p>
-            <p>LastName: {Data[0].lastname} </p>
-            <p>
-              {" "}
-              Father Name:{" "}
-              <span>
-                {Data[0].fatherName} <br />
-              </span>
-            </p>
-            <p>
-              {" "}
-              Phone Number:{" "}
-              <span>
+            <div id="gradient"></div>
+            <div id="card">
+              <img src={`${Data[0].image}`} alt="s" />
+              <h2>
                 {" "}
-                {Data[0].phonenumber} <br />
-              </span>
+                {Data[0].name} <span> {Data[0].lastname}</span>
+              </h2>
+              <p>Student of IT in Czech republic.</p>
               <p>
-                {" "}
-                Email: {Data[0].email} <br />
-              </p>{" "}
-              Gender: {Data[0].gender}
-            </p>
+                <h6 style={{ marginTop: "50px" }}>
+                  Father Name: {Data[0].fatherName}
+                </h6>
+                <h6>DOB: {Data[0].DOB.toLocaleDateString()}</h6>
+                <h6>Gender: {Data[0].gender}</h6>
+              </p>
+
+              <span class="left bottom">tel: {Data[0].phonenumber}</span>
+              <span class="right bottom">email: {Data[0].email}</span>
+            </div>
           </div>
         ) : null}
       </div>
@@ -523,20 +516,35 @@ export default function Form() {
   );
 }
 const Container = styled.div`
-  h3,
-  h2,
-  h1,
-  p {
+  h3 {
     color: white;
   }
-  img {
-    border-radius: 50%;
-    height: 150px;
+  p {
+    text-align: start;
   }
-  span {
+  .about {
+    position: absolute;
+    top: 0;
+    opacity: 0.4;
+    font-size: 100px !important;
+    margin: 0px;
+    top: 30%;
+    left: 35%;
+  }
+  h2 {
     text-decoration: underline;
-    margin-left: 10px;
+    text-transform: capitalize;
   }
+  h6 {
+    font-size: 14px !important;
+  }
+  .formShow {
+    width: auto !important;
+    background: none !important;
+    padding: 0 !important;
+    left: 46% !important;
+  }
+
   .red {
     color: red !important;
   }
@@ -832,5 +840,103 @@ const Container = styled.div`
   .error {
     color: white;
     margin-bottom: 20px;
+  }
+  body {
+    margin: 0 auto;
+    padding: 0;
+    background: #222;
+  }
+
+  .left {
+    font-size: 14px;
+    bottom: 55px;
+  }
+
+  .right {
+    font-size: 14px;
+    bottom: 20px;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .bottom {
+    right: 20px;
+    position: absolute;
+  }
+
+  #gradient {
+    background: #999955;
+    background-image: linear-gradient(
+      #dab046 20%,
+      #d73b25 20%,
+      #d73b25 40%,
+      #c71b25 40%,
+      #c71b25 60%,
+      #961a39 60%,
+      #961a39 80%,
+      #601035 80%
+    );
+    margin: 0 auto;
+    margin-top: 120px;
+    width: 100vw;
+    height: 150px;
+  }
+
+  #gradient:after {
+    content: "";
+    position: absolute;
+    background: #e9e2d0;
+    left: 50%;
+    margin-top: -67.5px;
+    margin-left: -270px;
+    padding-left: 20px;
+    border-radius: 5px;
+    width: 520px;
+    height: 295px;
+    z-index: -1;
+  }
+
+  #card {
+    position: absolute;
+    width: 450px;
+    height: 225px;
+    padding: 25px;
+    padding-bottom: 15px;
+    left: 50%;
+    top: 67.5px;
+    margin-left: -250px;
+    background: #e9e2d0;
+    box-shadow: -20px 0 35px -25px black, 20px 0 35px -25px black;
+    z-index: 5;
+  }
+
+  #card img {
+    width: 150px;
+    float: left;
+    border-radius: 5px;
+    margin-right: 20px;
+    -webkit-filter: sepia(1);
+    -moz-filter: sepia(1);
+    filter: sepia(1);
+  }
+
+  #card h2 {
+    font-family: courier;
+    color: #333;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 15pt;
+  }
+
+  #card p {
+    font-family: courier;
+    color: #555;
+    font-size: 13px;
+  }
+
+  #card span {
+    font-family: courier;
   }
 `;
